@@ -39,7 +39,7 @@
          (if-let [route-params# (route-matches route# request#)]
            (let [request# (#'assoc-route-params request# route-params#)]
              (let [~binding request#]
-               (render request# (do ~@body)))))))))
+               (render (do ~@body) request#))))))))
 
 (defmacro handlers [& more]
   (vec (map (fn [h] `(handle ~@h)) more)))
