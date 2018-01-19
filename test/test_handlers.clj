@@ -1,11 +1,12 @@
 (ns test-handlers
-  (:use anansi.handlers))
+  (:require [anansi.handlers :refer [handle]]
+            [clojure.test :refer [deftest is]]))
 
 (def simple-handler
   (handle :get "/" request
           "simple"))
 
-(defn test-simple-handler
+(deftest test-simple-handler
   []
-  (= (simple-handler {:request-method :get :uri "/"})
-     {:status 200, :headers {"Content-Type" "text/html"}, :body "simple"}))
+  (is (= (simple-handler {:request-method :get :uri "/"})
+         {:status 200, :headers {"Content-Type" "text/html; charset=utf-8"}, :body "simple"})))
